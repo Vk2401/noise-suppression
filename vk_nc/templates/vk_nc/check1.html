@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    {% load static %}
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'vk_nc/style.css' %}">
+    <link rel="stylesheet" href="{% static 'vk_nc/aud.css' %}">
+    <script src="{% static 'vk_nc/j.js' %}"></script>
+    <style>
+       
+    </style>
+</head>
+<body>
+   <div id="speechContainer">
+    <h1 class="head">Check the Audio that you Uploaded</h1>
+    
+    
+    <audio controls>
+        {% csrf_token %}
+        {% load static %}
+       <source src="{% static lk1 %}"  type="audio/wav">
+       {% comment %} <source src="{{hh}}"  type="audio/wav"> {% endcomment %}
+        Your browser does not support the audio element.
+        
+        </audio>
+        <br>
+        <br>
+        <br>
+        
+        <form  method="post" action="{% url 'rec_cl' %}" onsubmit="showPreloader()">
+            {% csrf_token %}
+            <input type="hidden" name="variable_name" value="{{ lk2 }}">
+            <input type="hidden" name="variable_name1" value="{{ lk1 }}">
+            <input type="submit" class="creative-button" value="clean" name="q"/>
+        </form>
+        <div class="loader-mask">
+            <div class="loader">
+                <div></div>
+                <div></div>
+         
+            </div>
+            
+        </div>
+   </div>
+   <center>
+    <div id ="pro" style="display: none;">
+        <img src="{% static 'load.gif' %}" alt="" width="50px" height="50px">
+        <h4>processing...</h4>
+
+    </div>
+</center>
+        <script>
+            $(window).load(function () {
+              // Preloader
+              $(".loader").fadeOut();
+              $(".loader-mask").delay(350).fadeOut("slow");
+            });
+            function showPreloader(){
+  
+  let a = document.querySelector("#speechContainer");
+  let b = document.querySelector("#pro");
+
+  a.style.display ="none";
+   document.body.style.background= "#fff";
+   b.style.display ="block"
+}
+            </script>
+</body>
+</html>

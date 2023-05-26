@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    {% load static %}
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'vk_nc/style.css' %}">
+    <link rel="stylesheet" href="{% static 'vk_nc/aud.css' %}">
+    <script src="{% static 'vk_nc/v.js' %}"></script>
+    <script src="{% static 'vk_nc/j.js' %}"></script>
+</head>
+<body>
+    <div>
+        <h1 class="head">Uncleaned audio  : </h1><br>
+
+        <audio controls>
+        {% csrf_token %}
+        {% load static %}
+        <source src="{% static audio_files %}"  type="audio/wav">
+        {% comment %} <source src="{{hh}}"  type="audio/wav"> {% endcomment %}
+        Your browser does not support the audio element.
+    
+        </audio>
+    </div>
+    
+    <div >
+        <h1 class="head">cleaned audio  : </h1><br>
+        <div>
+            <audio controls>
+                {% csrf_token %}
+                {% load static %}
+               <source src="{% static v %}"  type="audio/wav">
+               {% comment %} <source src="{{hh}}"  type="audio/wav"> {% endcomment %}
+                Your browser does not support the audio element.
+                
+            </audio>
+           
+            
+        </div>
+        
+    </div>
+
+    <div class="loader-mask">
+        <div class="loader">
+            <div></div>
+            <div></div>
+     
+        </div>
+        
+    </div>
+<script>
+$(window).load(function () {
+  // Preloader
+  $(".loader").fadeOut();
+  $(".loader-mask").delay(350).fadeOut("slow");
+});
+
+</script>
+  <form action="{% url 'login' %}">
+    <input type="submit" class="creative-button" value = "Home" name="q"/>
+  </form>
+</body>
+</html>

@@ -1,0 +1,10 @@
+django
+pydub
+pyaudio
+scipy
+tqdm
+tensorflow
+pillow
+matplotlib
+IPython
+ipywidgets

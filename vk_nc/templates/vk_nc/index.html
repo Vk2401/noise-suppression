@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vk</title>
+    {% csrf_token %}
+    {% load static %}
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'vk_nc/style.css' %}">
+    <script src="{% static 'vk_nc/j.js' %}"></script>
+    <style>
+        [type="file"] {
+            /* Style the color of the message that says 'No file chosen' */
+              color: #878787;
+            }
+            [type="file"]::-webkit-file-upload-button {
+              background: #ED1C1B;
+              border: 2px solid #ED1C1B;
+              border-radius: 4px;
+              color: #fff;
+              cursor: pointer;
+              font-size: 12px;
+              outline: none;
+              padding: 10px 25px;
+              text-transform: uppercase;
+              transition: all 1s ease;
+            }
+            
+            [type="file"]::-webkit-file-upload-button:hover {
+              background: #fff;
+              border: 2px solid #535353;
+              color: #000;
+            }
+            label{
+                display: none;
+            }
+            #ff{
+                width: 253px;
+                height: 122px;
+            }
+            .loader-mask {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #fff;
+    z-index: 99999;
+}
+
+.loader {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 50px;
+    height: 50px;
+    font-size: 0;
+    color: #00c9d0;
+    display: inline-block;
+    margin: -25px 0 0 -25px;
+    text-indent: -9999em;
+    -webkit-transform: translateZ(0);
+    -ms-transform: translateZ(0);
+    transform: translateZ(0);
+}
+.lead{
+  font-size:13px;
+}
+.loader div {
+    background-color: #d9b06a;
+    display: inline-block;
+    float: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 50px;
+    height: 50px;
+    opacity: .5;
+    border-radius: 50%;
+    -webkit-animation: ballPulseDouble 2s ease-in-out infinite;
+    animation: ballPulseDouble 2s ease-in-out infinite;
+}
+
+.loader div:last-child {
+    -webkit-animation-delay: -1s;
+    animation-delay: -1s;
+}
+
+@-webkit-keyframes ballPulseDouble {
+    0%,
+    100% {
+        -webkit-transform: scale(0);
+        transform: scale(0);
+    }
+    50% {
+        -webkit-transform: scale(1);
+        transform: scale(1);
+    }
+}
+
+@keyframes ballPulseDouble {
+    0%,
+    100% {
+        -webkit-transform: scale(0);
+        transform: scale(0);
+    }
+    50% {
+        -webkit-transform: scale(1);
+        transform: scale(1);
+    }
+}
+    </style>
+  
+</head>
+<body id="body">
+   
+<div id="speechContainer">
+    <h1 style="color: rgb(255, 255, 255);">AUDIO NOISE SUPPRESSION</h1>
+    <br>
+    <br>
+   <h3 class="head"> CLICK TO UPLOAD AND CLEAN THE NOISE </h3><br><br>
+  
+    <form method = 'post'   enctype="multipart/form-data" onsubmit="showPreloader1()">
+        {% csrf_token %} 
+        
+       {{form}}
+       <br>
+       <br>
+       <br>
+
+        <input type="submit" class="creative-button" value="clean" name="q"/>
+    </form>    
+        <br>
+        <br>
+    <form action = "{% url 'rec_py1' %}" id="ff" onsubmit="showPreloader()">
+       
+        <br>
+        <input type="submit" class="creative-button" value = "record" name="q"/>
+    </form> 
+    <div class="loader-mask">
+        <div class="loader">
+            <div></div>
+            <div></div>
+     
+        </div>
+        
+    </div>
+
+</div>
+<center>
+<div id ="pro" style="display: none;">
+    <img src="{% static 'vk_nc/microphone.png' %}" alt="" width="30px" height="30px">
+    <h4>recording...</h4>
+    
+</div>
+<div id ="pro1" style="display: none;">
+    <img src="{% static 'load.gif' %}" alt="" width="50px" height="50px">
+    <h4>loading...</h4>
+    
+</div>
+</center>
+<script>
+$(window).load(function () {
+  // Preloader
+  $(".loader").fadeOut();
+  $(".loader-mask").delay(350).fadeOut("slow");
+});
+function showPreloader(){
+  
+   let a = document.querySelector("#speechContainer");
+   let b = document.querySelector("#pro");
+
+   a.style.display ="none";
+   document.body.style.background= "#fff";
+   b.style.display ="block"
+
+   console.log('hii');
+}
+function showPreloader1(){
+
+
+    let a = document.querySelector("#speechContainer");
+   let b = document.querySelector("#pro1");
+
+   a.style.display ="none";
+   document.body.style.background= "#fff";
+   b.style.display ="block"
+
+   console.log('hii');
+}
+</script>
+</body>
+</html>

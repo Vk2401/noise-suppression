@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    {% load static %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+</head>
+<body>
+    hgygu
+    <form action = "{% url '' %} " method ="post" onsubmit="showPreloader()">
+        {{forms}}
+    </form>
+    <div class="loader-mask">
+        <div class="loader">
+            <div></div>
+            <div></div>
+     
+        </div>
+        
+    </div>
+<script>
+$(window).load(function () {
+  // Preloader
+  $(".loader").fadeOut();
+  $(".loader-mask").delay(350).fadeOut("slow");
+});
+function showPreloader(){
+  
+  let a = document.querySelector("#speechContainer");
+  let b = document.querySelector("#pro");
+
+  a.style.display ="none"
+  b.style.display ="block"
+  b.style.color ="#fff"
+  console.log('hii');
+}
+</script>
+</body>
+</html>
